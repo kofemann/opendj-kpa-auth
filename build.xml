@@ -34,10 +34,10 @@
   <taskdef resource="net/sf/antcontrib/antlib.xml"/>
 
   <!-- CONFIGURE: The name of the extension's Jar file. -->
-  <property name="pkg.name" value="example-plugin" />
+  <property name="pkg.name" value="kpa-plugin" />
 
   <!-- CONFIGURE: The description of this extension - used in the Javadoc title. -->
-  <property name="pkg.description" value="Example Plugin" />
+  <property name="pkg.description" value="Kerberos Pass-Through Authentication" />
 
   <!-- CONFIGURE: The path of the OpenDS installation. -->
   <property name="opends.install.dir" location=".." />
