@@ -31,7 +31,11 @@
   </description>
 
   <!-- Import extra tasks from ant-contrib (for, if-then-else, ...) -->
-  <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+  <taskdef resource="net/sf/antcontrib/antlib.xml">
+    <classpath>
+      <pathelement location="ext/ant-contrib-1.0b3.jar"/>
+    </classpath>
+  </taskdef>
 
   <!-- CONFIGURE: The name of the extension's Jar file. -->
   <property name="pkg.name" value="kpa-plugin" />
