@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<adm:managed-object name="example-plugin" plural-name="example-plugins"
-  package="com.example.opends" extends="plugin"
+<adm:managed-object name="kerberos-plugin" plural-name="kerberos-plugins"
+  package="coop.plausible.opendj.plugin.kpa" extends="plugin"
   parent-package="org.opends.server.admin.std"
   xmlns:adm="http://www.opends.org/admin"
   xmlns:ldap="http://www.opends.org/admin-ldap">
@@ -14,7 +14,7 @@
   <adm:property-override name="java-class">
     <adm:default-behavior>
       <adm:defined>
-        <adm:value>com.example.opends.ExamplePlugin</adm:value>
+        <adm:value>coop.plausible.opendj.plugin.kpa.KerberosPlugin</adm:value>
       </adm:defined>
     </adm:default-behavior>
   </adm:property-override>

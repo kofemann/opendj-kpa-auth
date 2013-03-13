@@ -24,7 +24,7 @@
  *
  *      Copyright 2006-2008 Sun Microsystems, Inc.
  */
-package com.example.opends;
+package coop.plausible.opendj.plugin.kpa;
 
 import static org.opends.server.loggers.ErrorLogger.logError;
 
@@ -44,27 +44,27 @@ import org.opends.messages.Message;
 import org.opends.messages.Category;
 import org.opends.messages.Severity;
 
-import com.example.opends.server.ExamplePluginCfg;
+import coop.plausible.opendj.plugin.kpa.server.KerberosPluginCfg;
 
-import static com.example.opends.messages.ExamplePluginMessages.*;
+import static coop.plausible.opendj.plugin.kpa.KerberosPluginMessages.*;
 
 /**
  * The example plugin implementation class. This plugin will output
  * the configured message to the error log during server start up.
  */
-public class ExamplePlugin extends
-  DirectoryServerPlugin<ExamplePluginCfg> implements
-  ConfigurationChangeListener<ExamplePluginCfg> {
+public class KerberosPlugin extends
+  DirectoryServerPlugin<KerberosPluginCfg> implements
+  ConfigurationChangeListener<KerberosPluginCfg> {
 
   // The current configuration.
-  private ExamplePluginCfg config;
+  private KerberosPluginCfg config;
 
 
 
   /**
    * Default constructor.
    */
-  public ExamplePlugin() {
+  public KerberosPlugin() {
     super();
   }
 
@@ -88,7 +88,7 @@ public class ExamplePlugin extends
    */
   @Override()
   public void initializePlugin(Set<PluginType> pluginTypes,
-      ExamplePluginCfg configuration)
+      KerberosPluginCfg configuration)
       throws ConfigException, InitializationException {
     // This plugin may only be used as a server startup plugin.
     for (PluginType t : pluginTypes) {
@@ -104,7 +104,7 @@ public class ExamplePlugin extends
 
     // Register change listeners. These are not really necessary for
     // this plugin since it is only used during server start-up.
-    configuration.addExampleChangeListener(this);
+    configuration.addKerberosChangeListener(this);
 
     // Save the configuration.
     this.config = configuration;
@@ -139,7 +139,7 @@ public class ExamplePlugin extends
    *         configuration.
    */
   public ConfigChangeResult applyConfigurationChange(
-      ExamplePluginCfg config) {
+      KerberosPluginCfg config) {
     // The new configuration has already been validated.
 
     // Log a message to say that the configuration has changed. This
@@ -172,7 +172,7 @@ public class ExamplePlugin extends
    *         acceptable, or <code>false</code> if it is not.
    */
   public boolean isConfigurationChangeAcceptable(
-      ExamplePluginCfg config, List<Message> messages) {
+      KerberosPluginCfg config, List<Message> messages) {
     // The only thing that can be validated here is the plugin's
     // message. However, it is always going to be valid, so let's
     // always return true.

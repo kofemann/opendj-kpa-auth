@@ -31,5 +31,5 @@
  * This package contains the classes which implement the example
  * plugin.
  */
-package com.example.opends;
+package coop.plausible.opendj.plugin.kpa;
 
