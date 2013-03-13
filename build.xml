@@ -151,9 +151,11 @@
     <copy todir="${opends.extensions.dir}">
       <fileset file="${package.dir}/*.jar" />
     </copy>
+    <!--
     <copy todir="${opends.config.dir}">
       <fileset file="${config.dir}/*.ldif" />
     </copy>
+    -->
     <copy todir="${opends.schema.dir}">
       <fileset file="${schema.dir}/*.ldif" />
     </copy>

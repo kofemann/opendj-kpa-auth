@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<adm:managed-object name="kerberos-plugin" plural-name="kerberos-plugins"
+<adm:managed-object name="kerberos-pass-through-authentication-policy" plural-name="kerberos-pass-through-authentication-policies"
   package="coop.plausible.opendj.plugin.kpa" extends="authentication-policy"
   parent-package="org.opends.server.admin.std"
   xmlns:adm="http://www.opends.org/admin"
@@ -14,7 +14,7 @@
   <adm:property-override name="java-class">
     <adm:default-behavior>
       <adm:defined>
-        <adm:value>coop.plausible.opendj.plugin.kpa.KerberosPlugin</adm:value>
+        <adm:value>coop.plausible.opendj.plugin.kpa.KerberosPassThroughAuthenticationPolicy</adm:value>
       </adm:defined>
     </adm:default-behavior>
   </adm:property-override>

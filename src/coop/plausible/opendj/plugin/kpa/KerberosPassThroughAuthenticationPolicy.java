@@ -26,7 +26,7 @@
  */
 package coop.plausible.opendj.plugin.kpa;
 
-import coop.plausible.opendj.plugin.kpa.server.KerberosPluginCfg;
+import coop.plausible.opendj.plugin.kpa.server.KerberosPassThroughAuthenticationPolicyCfg;
 import org.opends.messages.Message;
 import org.opends.server.api.AuthenticationPolicy;
 import org.opends.server.api.AuthenticationPolicyFactory;
@@ -39,15 +39,12 @@ import java.util.List;
  * The example plugin implementation class. This plugin will output
  * the configured message to the error log during server start up.
  */
-public class KerberosPlugin implements AuthenticationPolicyFactory<KerberosPluginCfg> {
-    // The current configuration.
-    private KerberosPluginCfg config;
-
+public class KerberosPassThroughAuthenticationPolicy implements AuthenticationPolicyFactory<KerberosPassThroughAuthenticationPolicyCfg> {
     /**
      * Default constructor used by the admin framework when instantiating
      * the plugin.
      */
-    public KerberosPlugin () {
+    public KerberosPassThroughAuthenticationPolicy () {
         super();
     }
 
@@ -55,7 +52,7 @@ public class KerberosPlugin implements AuthenticationPolicyFactory<KerberosPlugi
      * {@inheritDoc}
      */
     @Override
-    public AuthenticationPolicy createAuthenticationPolicy (KerberosPluginCfg kerberosPluginCfg) throws ConfigException, InitializationException {
+    public AuthenticationPolicy createAuthenticationPolicy (KerberosPassThroughAuthenticationPolicyCfg kerberosPluginCfg) throws ConfigException, InitializationException {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -63,7 +60,7 @@ public class KerberosPlugin implements AuthenticationPolicyFactory<KerberosPlugi
      * {@inheritDoc}
      */
     @Override
-    public boolean isConfigurationAcceptable (KerberosPluginCfg kerberosPluginCfg, List<Message> messages) {
+    public boolean isConfigurationAcceptable (KerberosPassThroughAuthenticationPolicyCfg kerberosPluginCfg, List<Message> messages) {
         return true;
     }
 }
