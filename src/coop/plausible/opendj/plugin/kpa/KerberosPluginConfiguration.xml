@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <adm:managed-object name="kerberos-plugin" plural-name="kerberos-plugins"
-  package="coop.plausible.opendj.plugin.kpa" extends="plugin"
+  package="coop.plausible.opendj.plugin.kpa" extends="authentication-policy"
   parent-package="org.opends.server.admin.std"
   xmlns:adm="http://www.opends.org/admin"
   xmlns:ldap="http://www.opends.org/admin-ldap">
