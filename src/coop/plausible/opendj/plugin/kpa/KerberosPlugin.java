@@ -52,130 +52,117 @@ import static coop.plausible.opendj.plugin.kpa.KerberosPluginMessages.*;
  * The example plugin implementation class. This plugin will output
  * the configured message to the error log during server start up.
  */
-public class KerberosPlugin extends
-  DirectoryServerPlugin<KerberosPluginCfg> implements
-  ConfigurationChangeListener<KerberosPluginCfg> {
+public class KerberosPlugin extends DirectoryServerPlugin<KerberosPluginCfg>
+    implements ConfigurationChangeListener<KerberosPluginCfg>
+{
+    // The current configuration.
+    private KerberosPluginCfg config;
 
-  // The current configuration.
-  private KerberosPluginCfg config;
-
-
-
-  /**
-   * Default constructor.
-   */
-  public KerberosPlugin() {
-    super();
-  }
-
-
-  /**
-   * Performs any initialization necessary for this plugin.  This will
-   * be called as soon as the plugin has been loaded and before it is
-   * registered with the server.
-   *
-   * @param  pluginTypes    The set of plugin types that indicate the
-   *                        ways in which this plugin will be invoked.
-   * @param  configuration  The configuration for this plugin.
-   *
-   * @throws  ConfigException  If the provided entry does not contain
-   *                           a valid configuration for this plugin.
-   *
-   * @throws  InitializationException  If a problem occurs while
-   *                                   initializing the plugin that is
-   *                                   not related to the server
-   *                                   configuration.
-   */
-  @Override()
-  public void initializePlugin(Set<PluginType> pluginTypes,
-      KerberosPluginCfg configuration)
-      throws ConfigException, InitializationException {
-    // This plugin may only be used as a server startup plugin.
-    for (PluginType t : pluginTypes) {
-      switch (t) {
-      case STARTUP:
-        // This is fine.
-        break;
-      default:
-        Message message = ERR_INITIALIZE_PLUGIN.get(String.valueOf(t));
-        throw new ConfigException(message);
-      }
+    /**
+     * Default constructor.
+     */
+    public KerberosPlugin () {
+        super();
     }
 
-    // Register change listeners. These are not really necessary for
-    // this plugin since it is only used during server start-up.
-    configuration.addKerberosChangeListener(this);
 
-    // Save the configuration.
-    this.config = configuration;
-  }
+    /**
+     * Performs any initialization necessary for this plugin.  This will
+     * be called as soon as the plugin has been loaded and before it is
+     * registered with the server.
+     *
+     * @param pluginTypes   The set of plugin types that indicate the
+     *                      ways in which this plugin will be invoked.
+     * @param configuration The configuration for this plugin.
+     * @throws ConfigException         If the provided entry does not contain
+     *                                 a valid configuration for this plugin.
+     * @throws InitializationException If a problem occurs while
+     *                                 initializing the plugin that is
+     *                                 not related to the server
+     *                                 configuration.
+     */
+    @Override ()
+    public void initializePlugin (Set<PluginType> pluginTypes, KerberosPluginCfg configuration)
+            throws ConfigException, InitializationException
+    {
+        // This plugin may only be used as a server startup plugin.
+        for (PluginType t : pluginTypes) {
+            switch (t) {
+                case STARTUP:
+                    // This is fine.
+                    break;
+                default:
+                    Message message = ERR_INITIALIZE_PLUGIN.get(String.valueOf(t));
+                    throw new ConfigException(message);
+            }
+        }
 
+        // Register change listeners. These are not really necessary for
+        // this plugin since it is only used during server start-up.
+        configuration.addKerberosChangeListener(this);
 
-
-  /**
-   * Performs any processing that should be done when the Directory
-   * Server is in the process of starting.  This method will be called
-   * after virtually all other initialization has been performed but
-   * before the connection handlers are started.
-   *
-   * @return  The result of the startup plugin processing.
-   */
-  @Override
-  public PluginResult.Startup doStartup() {
-    // Log the provided message.
-    Message message = NOTE_DO_STARTUP.get(String.valueOf(config.getMessage()));
-    logError(message);
-    return PluginResult.Startup.continueStartup();
-  }
-
-
-
-  /**
-   * Applies the configuration changes to this change listener.
-   *
-   * @param config
-   *          The new configuration containing the changes.
-   * @return Returns information about the result of changing the
-   *         configuration.
-   */
-  public ConfigChangeResult applyConfigurationChange(
-      KerberosPluginCfg config) {
-    // The new configuration has already been validated.
-
-    // Log a message to say that the configuration has changed. This
-    // isn't necessary, but we'll do it just to show that the change
-    // has taken effect.
-    Message message = NOTE_APPLY_CONFIGURATION_CHANGE.get(
-                                      String.valueOf(this.config.getMessage()),
-                                      String.valueOf(config.getMessage()));
-    logError(message);
-
-    // Update the configuration.
-    this.config = config;
-
-    // Update was successfull, no restart required.
-    return new ConfigChangeResult(ResultCode.SUCCESS, false);
-  }
+        // Save the configuration.
+        this.config = configuration;
+    }
 
 
+    /**
+     * Performs any processing that should be done when the Directory
+     * Server is in the process of starting.  This method will be called
+     * after virtually all other initialization has been performed but
+     * before the connection handlers are started.
+     *
+     * @return The result of the startup plugin processing.
+     */
+    @Override
+    public PluginResult.Startup doStartup () {
+        // Log the provided message.
+        Message message = NOTE_DO_STARTUP.get(String.valueOf(config.getMessage()));
+        logError(message);
+        return PluginResult.Startup.continueStartup();
+    }
 
-  /**
-   * Indicates whether the proposed change to the configuration is
-   * acceptable to this change listener.
-   *
-   * @param config
-   *          The new configuration containing the changes.
-   * @param messages
-   *          A list that can be used to hold messages about why the
-   *          provided configuration is not acceptable.
-   * @return Returns <code>true</code> if the proposed change is
-   *         acceptable, or <code>false</code> if it is not.
-   */
-  public boolean isConfigurationChangeAcceptable(
-      KerberosPluginCfg config, List<Message> messages) {
-    // The only thing that can be validated here is the plugin's
-    // message. However, it is always going to be valid, so let's
-    // always return true.
-    return true;
-  }
+
+    /**
+     * Applies the configuration changes to this change listener.
+     *
+     * @param config The new configuration containing the changes.
+     * @return Returns information about the result of changing the
+     *         configuration.
+     */
+    public ConfigChangeResult applyConfigurationChange (KerberosPluginCfg config) {
+        // The new configuration has already been validated.
+
+        // Log a message to say that the configuration has changed. This
+        // isn't necessary, but we'll do it just to show that the change
+        // has taken effect.
+        Message message = NOTE_APPLY_CONFIGURATION_CHANGE.get(
+                String.valueOf(this.config.getMessage()),
+                String.valueOf(config.getMessage()));
+        logError(message);
+
+        // Update the configuration.
+        this.config = config;
+
+        // Update was successfull, no restart required.
+        return new ConfigChangeResult(ResultCode.SUCCESS, false);
+    }
+
+
+    /**
+     * Indicates whether the proposed change to the configuration is
+     * acceptable to this change listener.
+     *
+     * @param config   The new configuration containing the changes.
+     * @param messages A list that can be used to hold messages about why the
+     *                 provided configuration is not acceptable.
+     * @return Returns <code>true</code> if the proposed change is
+     *         acceptable, or <code>false</code> if it is not.
+     */
+    public boolean isConfigurationChangeAcceptable (KerberosPluginCfg config, List<Message> messages) {
+        // The only thing that can be validated here is the plugin's
+        // message. However, it is always going to be valid, so let's
+        // always return true.
+        return true;
+    }
 }
