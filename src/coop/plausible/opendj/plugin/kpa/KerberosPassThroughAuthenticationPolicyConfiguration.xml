@@ -4,11 +4,14 @@
   parent-package="org.opends.server.admin.std"
   xmlns:adm="http://www.opends.org/admin"
   xmlns:ldap="http://www.opends.org/admin-ldap">
-  <adm:synopsis>An example "Hello World" plugin.</adm:synopsis>
+  <adm:synopsis>
+      An authentication policy for users whose credentials are managed
+      by an external Kerberos realm.
+  </adm:synopsis>
   <adm:profile name="ldap">
     <ldap:object-class>
-      <ldap:name>ds-cfg-kpa-plugin</ldap:name>
-      <ldap:superior>ds-cfg-plugin</ldap:superior>
+      <ldap:name>pldj-cfg-kerberos-pass-through-authentication-policy</ldap:name>
+      <ldap:superior>ds-cfg-authentication-policy</ldap:superior>
     </ldap:object-class>
   </adm:profile>
   <adm:property-override name="java-class">
@@ -18,20 +21,4 @@
       </adm:defined>
     </adm:default-behavior>
   </adm:property-override>
-  <adm:property name="message">
-    <adm:synopsis>The message to be logged.</adm:synopsis>
-    <adm:default-behavior>
-      <adm:defined>
-        <adm:value>Hello World</adm:value>
-      </adm:defined>
-    </adm:default-behavior>
-    <adm:syntax>
-      <adm:string />
-    </adm:syntax>
-    <adm:profile name="ldap">
-      <ldap:attribute>
-        <ldap:name>ds-cfg-example-plugin-message</ldap:name>
-      </ldap:attribute>
-    </adm:profile>
-  </adm:property>
 </adm:managed-object>
