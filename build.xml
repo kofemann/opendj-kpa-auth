@@ -44,7 +44,7 @@
   <property name="pkg.description" value="Kerberos Pass-Through Authentication" />
 
   <!-- CONFIGURE: The path of the OpenDS installation. -->
-  <property name="opends.install.dir" location=".." />
+  <property name="opends.install.dir" location="opendj" />
 
   <!-- CONFIGURE: The path of Xalan-Java distribution. -->
   <property name="xalan.directory" location="ext/xalan-j" />
