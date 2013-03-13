@@ -335,10 +335,10 @@
         </path>
         <property name="msg.dir.list" refid="messages.properties" />
 
-        <!-- includes build-tools.jar in class path -->
+        <!-- includes lib/*.jar into classpath (actually build-tools.jar) -->
         <path id="msg.classpath">
           <fileset dir="${lib.dir}">
-            <include name="build-tools.jar" />
+            <include name="*.jar" />
           </fileset>
         </path>
         <property name="build-tools.jar" refid="msg.classpath" />
