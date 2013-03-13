@@ -7,7 +7,7 @@
   <adm:synopsis>An example "Hello World" plugin.</adm:synopsis>
   <adm:profile name="ldap">
     <ldap:object-class>
-      <ldap:name>ds-cfg-example-plugin</ldap:name>
+      <ldap:name>ds-cfg-kpa-plugin</ldap:name>
       <ldap:superior>ds-cfg-plugin</ldap:superior>
     </ldap:object-class>
   </adm:profile>

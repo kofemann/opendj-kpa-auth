@@ -30,9 +30,9 @@ dn: cn=schema
 objectClass: top
 objectClass: ldapSubentry
 objectClass: subschema
-attributeTypes: ( ds-cfg-example-plugin-message-oid NAME 'ds-cfg-example-plugin-message'
+attributeTypes: ( ds-cfg-kpa-plugin-message-oid NAME 'ds-cfg-kpa-plugin-message'
   SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE
   X-ORIGIN 'OpenDS Directory Server' )
-objectClasses: ( ds-cfg-example-plugin-oid NAME 'ds-cfg-example-plugin'
-  SUP ds-cfg-plugin STRUCTURAL MAY ( ds-cfg-example-plugin-message )
+objectClasses: ( ds-cfg-example-plugin-oid NAME 'ds-cfg-kpa-plugin'
+  SUP ds-cfg-plugin STRUCTURAL MAY ( ds-cfg-kpa-plugin-message )
   X-ORIGIN 'OpenDS Directory Server' )
