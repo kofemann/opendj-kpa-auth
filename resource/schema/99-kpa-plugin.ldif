@@ -14,9 +14,8 @@ dn: cn=schema
 objectClass: top
 objectClass: ldapSubentry
 objectClass: subschema
-
 objectClasses: ( 1.3.6.1.4.1.35070.1.3.2.1
-    NAME 'pldj-cfg-kerberos-pass-through-authentication-policy'
-    SUP ds-cfg-plugin
+    NAME 'pl-ds-cfg-kerberos-pass-through-authentication-policy'
+    SUP ds-cfg-authentication-policy
     STRUCTURAL
     X-ORIGIN 'Plausible Labs' )

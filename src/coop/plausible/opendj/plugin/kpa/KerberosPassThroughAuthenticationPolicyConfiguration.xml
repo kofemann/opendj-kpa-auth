@@ -10,7 +10,7 @@
   </adm:synopsis>
   <adm:profile name="ldap">
     <ldap:object-class>
-      <ldap:name>pldj-cfg-kerberos-pass-through-authentication-policy</ldap:name>
+      <ldap:name>pl-ds-cfg-kerberos-pass-through-authentication-policy</ldap:name>
       <ldap:superior>ds-cfg-authentication-policy</ldap:superior>
     </ldap:object-class>
   </adm:profile>
