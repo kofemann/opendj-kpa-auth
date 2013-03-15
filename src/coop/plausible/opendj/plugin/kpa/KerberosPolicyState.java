@@ -1,8 +1,29 @@
 /*
- * Author: Landon Fuller <landonf@mac68k.info>
+ * CDDL HEADER START
  *
- * Copyright (c) 2013 Landon Fuller <landonf@mac68k.info>
- * All rights reserved.
+ * The contents of this file are subject to the terms of the
+ * Common Development and Distribution License, Version 1.0 only
+ * (the "License").  You may not use this file except in compliance
+ * with the License.
+ *
+ * You can obtain a copy of the license at
+ * trunk/opends/resource/legal-notices/OpenDS.LICENSE
+ * or https://OpenDS.dev.java.net/OpenDS.LICENSE.
+ * See the License for the specific language governing permissions
+ * and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL HEADER in each
+ * file and include the License file at
+ * trunk/opends/resource/legal-notices/OpenDS.LICENSE.  If applicable,
+ * add the following below this CDDL HEADER, with the fields enclosed
+ * by brackets "[]" replaced with your own identifying information:
+ *      Portions Copyright [yyyy] [name of copyright owner]
+ *
+ * CDDL HEADER END
+ *
+ *
+ *      Copyright 2013 Plausible Labs Cooperative, Inc.
+ *      Copyright 2011 ForgeRock AS.
  */
 
 package coop.plausible.opendj.plugin.kpa;
@@ -20,10 +41,7 @@ import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.login.*;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 import static org.opends.server.loggers.ErrorLogger.logError;
@@ -66,6 +84,33 @@ class KerberosPolicyState extends AuthenticationPolicyState {
             logError(Message.fromObject("The 'sun.security.krb5.principal' system property is set. This will override all " +
                 "the authentication principal when performing Kerberos pass-through authentication."));
             return false;
+        }
+
+        /* Find the first available user attribute */
+        String userPrincipal = null;
+        for (AttributeType at : this.policy.getConfig().getMappedAttribute()) {
+            final List<Attribute> attributes = userEntry.getAttribute(at);
+            if (attributes == null || attributes.isEmpty())
+                continue;
+
+            for (Attribute attr : attributes) {
+                if (attr.isEmpty())
+                    continue;
+
+                userPrincipal = attr.iterator().next().getValue().toString();
+                break;
+            }
+
+            if (userPrincipal != null)
+                break;
+        }
+
+        if (userPrincipal == null) {
+            throw new DirectoryException(ResultCode.INVALID_CREDENTIALS,
+                    Message.fromObject("The user \"%s\" could not be authenticated using Kerberos PTA policy \"%s\" because the following mapping attributes were not found in the user's entry: %s",
+                        String.valueOf(userEntry.getDN()),
+                        String.valueOf(this.policy.getConfig().dn()),
+                        mappedAttributesAsString(this.policy.getConfig().getMappedAttribute())));
         }
 
         /* Kerberos module options */
@@ -113,5 +158,25 @@ class KerberosPolicyState extends AuthenticationPolicyState {
         }
 
         return true;
+    }
+
+    // This was copied from ForgeRock's LDAPPassThroughAuthenticationPolicyFactory
+    private static String mappedAttributesAsString (final Collection<AttributeType> attributes) {
+        switch (attributes.size()) {
+            case 0:
+                return "";
+            case 1:
+                return attributes.iterator().next().getNameOrOID();
+            default:
+                final StringBuilder builder = new StringBuilder();
+                final Iterator<AttributeType> i = attributes.iterator();
+                builder.append(i.next().getNameOrOID());
+                while (i.hasNext())
+                {
+                    builder.append(", ");
+                    builder.append(i.next().getNameOrOID());
+                }
+                return builder.toString();
+        }
     }
 }

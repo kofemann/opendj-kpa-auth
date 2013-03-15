@@ -31,7 +31,7 @@
         </adm:default-behavior>
     </adm:property-override>
     
-    <adm:property name="mapped-attribute" mandatory="true">
+    <adm:property name="mapped-attribute" mandatory="true" multi-valued="true">
         <adm:synopsis>
             Specifies one of more attributes in the user's entry whose
             value(s) will be used as the kerberos principal when authenticating

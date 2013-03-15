@@ -36,4 +36,12 @@ class KerberosPolicy extends AuthenticationPolicy {
     public AuthenticationPolicyState createAuthenticationPolicyState (Entry entry, long l) throws DirectoryException {
         return new KerberosPolicyState(this, entry);
     }
+
+    /**
+     * @return The kerberos pass-through authentication configuration.
+     */
+    public KerberosPassThroughAuthenticationPolicyCfg getConfig() {
+        return config;
+    }
+
 }
