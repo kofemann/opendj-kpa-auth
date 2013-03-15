@@ -120,8 +120,6 @@ class KerberosPolicyState extends AuthenticationPolicyState {
         options.put("doNotPrompt", "true"); // Fetch principal et al from the shared state
         options.put("useFirstPass", "true"); // Use auth info from the shared state, do not retry
 
-        options.put("debug", "true");
-
         /* Kerberos module state */
         final Map<String,Object> state = new HashMap<String, Object>();
         state.put("javax.security.auth.login.name", "landonf@EXAMPLE.ORG" /* TODO!!! */);
