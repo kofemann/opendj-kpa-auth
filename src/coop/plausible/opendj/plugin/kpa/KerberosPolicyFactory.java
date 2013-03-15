@@ -36,15 +36,14 @@ import org.opends.server.types.InitializationException;
 import java.util.List;
 
 /**
- * The example plugin implementation class. This plugin will output
- * the configured message to the error log during server start up.
+ * Kerberos pass-through authentication policy factory.
  */
-public class KerberosPassThroughAuthenticationPolicy implements AuthenticationPolicyFactory<KerberosPassThroughAuthenticationPolicyCfg> {
+public class KerberosPolicyFactory implements AuthenticationPolicyFactory<KerberosPassThroughAuthenticationPolicyCfg> {
     /**
      * Default constructor used by the admin framework when instantiating
      * the plugin.
      */
-    public KerberosPassThroughAuthenticationPolicy () {
+    public KerberosPolicyFactory () {
         super();
     }
 
@@ -52,8 +51,8 @@ public class KerberosPassThroughAuthenticationPolicy implements AuthenticationPo
      * {@inheritDoc}
      */
     @Override
-    public AuthenticationPolicy createAuthenticationPolicy (KerberosPassThroughAuthenticationPolicyCfg kerberosPluginCfg) throws ConfigException, InitializationException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public AuthenticationPolicy createAuthenticationPolicy (KerberosPassThroughAuthenticationPolicyCfg config) throws ConfigException, InitializationException {
+        return new KerberosPolicy(config);
     }
 
     /**

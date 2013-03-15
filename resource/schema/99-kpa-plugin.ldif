@@ -18,4 +18,5 @@ objectClasses: ( 1.3.6.1.4.1.35070.1.3.2.1
     NAME 'pl-ds-cfg-kerberos-pass-through-authentication-policy'
     SUP ds-cfg-authentication-policy
     STRUCTURAL
+    MAY ( ds-cfg-mapped-attribute )
     X-ORIGIN 'Plausible Labs' )

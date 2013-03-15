@@ -1,24 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<adm:managed-object name="kerberos-pass-through-authentication-policy" plural-name="kerberos-pass-through-authentication-policies"
-  package="coop.plausible.opendj.plugin.kpa" extends="authentication-policy"
-  parent-package="org.opends.server.admin.std"
-  xmlns:adm="http://www.opends.org/admin"
-  xmlns:ldap="http://www.opends.org/admin-ldap">
-  <adm:synopsis>
-      An authentication policy for users whose credentials are managed
-      by an external Kerberos realm.
-  </adm:synopsis>
-  <adm:profile name="ldap">
-    <ldap:object-class>
-      <ldap:name>pl-ds-cfg-kerberos-pass-through-authentication-policy</ldap:name>
-      <ldap:superior>ds-cfg-authentication-policy</ldap:superior>
-    </ldap:object-class>
-  </adm:profile>
-  <adm:property-override name="java-class">
-    <adm:default-behavior>
-      <adm:defined>
-        <adm:value>coop.plausible.opendj.plugin.kpa.KerberosPassThroughAuthenticationPolicy</adm:value>
-      </adm:defined>
-    </adm:default-behavior>
-  </adm:property-override>
+<adm:managed-object name="kerberos-pass-through-authentication-policy"
+                    plural-name="kerberos-pass-through-authentication-policies"
+                    package="coop.plausible.opendj.plugin.kpa" extends="authentication-policy"
+                    parent-package="org.opends.server.admin.std"
+                    xmlns:adm="http://www.opends.org/admin"
+                    xmlns:ldap="http://www.opends.org/admin-ldap">
+
+    <adm:synopsis>
+        An authentication policy for users whose credentials are managed
+        by an external Kerberos realm.
+    </adm:synopsis>
+
+    <adm:description>
+        Authentication attempts will be issued via Kerberos based on the criterea
+        specified in this policy.
+    </adm:description>
+
+    <adm:profile name="ldap">
+        <ldap:object-class>
+            <ldap:name>pl-ds-cfg-kerberos-pass-through-authentication-policy</ldap:name>
+            <ldap:superior>ds-cfg-authentication-policy</ldap:superior>
+        </ldap:object-class>
+    </adm:profile>
+
+    <adm:property-override name="java-class">
+        <adm:default-behavior>
+            <adm:defined>
+                <adm:value>coop.plausible.opendj.plugin.kpa.KerberosPolicyFactory</adm:value>
+            </adm:defined>
+        </adm:default-behavior>
+    </adm:property-override>
+    
+    <adm:property name="mapped-attribute" mandatory="true">
+        <adm:synopsis>
+            Specifies one of more attributes in the user's entry whose
+            value(s) will be used as the kerberos principal when authenticating
+            with the remote KDC.
+        </adm:synopsis>
+        <adm:description>
+            At least one value must be provided. All values must refer
+            to the name or OID of an attribute type defined in the directory server
+            schema. At least one of the named attributes must exist in a user's
+            local entry in order for authentication to proceed. The user's entry
+            will be searched for the listed attribute types, in order, and the first
+            available attribute will be used.
+        </adm:description>
+        <adm:default-behavior>
+            <adm:undefined/>
+        </adm:default-behavior>
+        <adm:syntax>
+            <adm:attribute-type/>
+        </adm:syntax>
+        <adm:profile name="ldap">
+            <ldap:attribute>
+                <ldap:name>ds-cfg-mapped-attribute</ldap:name>
+            </ldap:attribute>
+        </adm:profile>
+    </adm:property>
 </adm:managed-object>
