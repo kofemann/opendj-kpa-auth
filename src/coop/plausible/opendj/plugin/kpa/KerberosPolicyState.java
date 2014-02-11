@@ -37,10 +37,8 @@ import org.opends.server.types.*;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.*;
-import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.login.*;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.*;
 
 
@@ -55,7 +53,7 @@ import static org.opends.server.loggers.debug.DebugLogger.getTracer;
 class KerberosPolicyState extends AuthenticationPolicyState {
     /** The parent kerberos policy. */
     private final KerberosPolicy policy;
-    
+
     private final DebugTracer TRACER = getTracer();
 
     /**
@@ -113,6 +111,7 @@ class KerberosPolicyState extends AuthenticationPolicyState {
                         mappedAttributesAsString(this.policy.getConfig().getMappedAttribute())));
         }
 
+	String krb5Principal = userPrincipal + "@" + this.policy.getConfig().getKrb5Realm();
         /* Kerberos module options */
         final Map<String,Object> options = new HashMap<String, Object>();
         options.put("refreshKrb5Config", "true"); // Fetch most up-to-date configuration
@@ -122,7 +121,7 @@ class KerberosPolicyState extends AuthenticationPolicyState {
 
         /* Kerberos module state */
         final Map<String,Object> state = new HashMap<String, Object>();
-        state.put("javax.security.auth.login.name", "landonf@EXAMPLE.ORG" /* TODO!!! */);
+        state.put("javax.security.auth.login.name", krb5Principal);
         state.put("javax.security.auth.login.password", byteString.toString().toCharArray());
 
         /* Create the noop handler */

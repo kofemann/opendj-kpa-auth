@@ -57,4 +57,32 @@
             </ldap:attribute>
         </adm:profile>
     </adm:property>
+
+    <adm:property name="krb5-realm" mandatory="true">
+	<adm:synopsis>
+	    Specifies the kerberos realm.
+	</adm:synopsis>
+	<adm:description>
+	    Kerberos realm of for pass-trough authentication.
+	</adm:description>
+	<adm:default-behavior>
+	    <adm:undefined/>
+	</adm:default-behavior>
+	<adm:syntax>
+	    <adm:string>
+		<adm:pattern>
+		    <adm:regex>^.+$</adm:regex>
+		    <adm:usage>REALM</adm:usage>
+		    <adm:synopsis>
+			A kerberos realm
+		    </adm:synopsis>
+		</adm:pattern>
+	    </adm:string>
+	</adm:syntax>
+	<adm:profile name="ldap">
+	    <ldap:attribute>
+		<ldap:name>krb5realm</ldap:name>
+	    </ldap:attribute>
+	</adm:profile>
+    </adm:property>
 </adm:managed-object>
