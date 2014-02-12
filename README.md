@@ -10,17 +10,23 @@ Requirements
 Build and Install
 ----------------
   1. build and install the extention
+
     ```$ and -Dopends.install.dir=/path/to/opendj install```
+
   2. restart the server
+
     ```$ bin/stop-ds --restart```
+
   3. configure the pass-through for kerberos
-    ```bin/dsconfig -X create-password-policy \
+
+    ```$ bin/dsconfig -X create-password-policy \
        --type kerberos-pass-through \
        --policy-name "Krb5 Pass Through" \
        --set krb-realm:EXAMPLE.COM \
-       --set mapped-attribute=uid
-    ```
+       --set mapped-attribute=uid```
+
   4. assign pass-through authentication to users
+
     You assign authentication policies in the same way as you assign password
     policies, by using the ***ds-pwp-password-policy-dn*** attribute:
     ```ds-pwp-password-policy-dn: cn=Krb5 Pass Through,cn=Password Policies,cn=config```
