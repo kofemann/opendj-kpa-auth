@@ -11,7 +11,7 @@ Build and Install
 ----------------
   1. build and install the extention
 
-    ```$ and -Dopends.install.dir=/path/to/opendj install```
+    ```$ ant -Dopends.install.dir=/path/to/opendj install```
 
   2. restart the server
 
@@ -22,7 +22,7 @@ Build and Install
     ```$ bin/dsconfig -X create-password-policy \
        --type kerberos-pass-through \
        --policy-name "Krb5 Pass Through" \
-       --set krb-realm:EXAMPLE.COM \
+       --set krb5-realm:EXAMPLE.COM \
        --set mapped-attribute=uid```
 
   4. assign pass-through authentication to users
