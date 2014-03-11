@@ -23,7 +23,7 @@ Build and Install
        --type kerberos-pass-through \
        --policy-name "Krb5 Pass Through" \
        --set krb5-realm:EXAMPLE.COM \
-       --set mapped-attribute=uid```
+       --set mapped-attribute:uid```
 
   4. assign pass-through authentication to users
 
