@@ -103,7 +103,7 @@
   <target name="clean" description="Clean up any files generated during the build process.">
     <delete dir="${build.dir}" />
     <delete includeemptydirs="true">
-      <fileset dir="${src.gen.dir}" includes="**/*" />
+      <fileset dir="${src.gen.dir}" includes="**/*" erroronmissingdir="false" />
     </delete>
   </target>
 
