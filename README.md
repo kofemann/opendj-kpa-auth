@@ -19,11 +19,13 @@ Build and Install
 
   3. configure the pass-through for kerberos
 
-    ```$ bin/dsconfig -X create-password-policy \
+    ```
+    $ bin/dsconfig -X create-password-policy \
        --type kerberos-pass-through \
        --policy-name "Krb5 Pass Through" \
        --set krb5-realm:EXAMPLE.COM \
-       --set mapped-attribute:uid```
+       --set mapped-attribute:uid
+     ```
 
   4. assign pass-through authentication to users
 
