@@ -1,3 +1,6 @@
+# Rpository is archived. Concider alternative [opendj-kpa](https://github.com/kofemann/opendj-kpa)
+
+
 This is an OpenDJ authentication policy plugin for users whose credentials
 are managed by an external Kerberos realm.
 
